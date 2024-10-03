@@ -6,6 +6,7 @@ import { BsCart3 } from "react-icons/bs";
 import logoc from "../../assets/comfort.png";
 import { Input } from "antd";
 import "../header/header.css"
+import { Link } from "react-router-dom";
 
 const Header = () => {
     const { Search } = Input;
@@ -34,7 +35,7 @@ const Header = () => {
 
             <div className="flex justify-between items-center p-4  shadow-md sticky top-0 nav">
                 <div>
-                    <img src={logoc} alt="Comforty Logo" className="w-[222px] h-auto" />
+                   <Link to={"/"}> <img src={logoc} alt="Comforty Logo" className="w-[222px] h-auto" /></Link>
                 </div>
 
                 <div className="flex-grow mx-32">
@@ -53,7 +54,7 @@ const Header = () => {
                     </div>
 
                     <div className="p-2 bg-gray-100 hover:bg-gray-200 transition rounded cursor-pointer">
-                        <FcLike className="text-2xl" />
+                       <Link to="/productLikes"> <FcLike className="text-2xl" /></Link>
                     </div>
 
                     <div className="p-2 bg-gray-100 hover:bg-gray-200 transition rounded cursor-pointer">

@@ -1,19 +1,14 @@
-import Banner from "./components/banner/Banner"
-import Header from "./components/header/Header"
-import Products from "./components/products/Products"
-import RouteController from "./routes/RouteController"
 
+import  Header  from "./components/header/Header";
+import RouteController from "./routes/RouteController";
 
 function App() {
-
   return (
     <>
-    <Header/>
-    <Banner/>
-    <Products/>
-     <RouteController/>
+       <Header/>
+      <RouteController />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
