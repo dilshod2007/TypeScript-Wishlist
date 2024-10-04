@@ -1,23 +1,24 @@
 import { FiShoppingCart, FiHeart, FiEye, FiX } from "react-icons/fi";
 import axios from "../../api/index";
 import { useEffect, useState } from "react";
-import { productsType   } from "../../redux/types";
+import { productsType } from "../../redux/types/index";
 import { AxiosResponse } from "axios";
 import { useDispatch, useSelector } from "react-redux"; 
 import { likeProduct, unlikeProduct } from "../../redux/slices/LikeSlices";
 import "../products/products.css";
+import { addToCart } from "../../redux/slices/cartSlices";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Products = () => {
-  const [products, setProducts] = useState<productsType[]>([]);
+  const [products, setProducts] = useState <productsType[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null); 
   const dispatch = useDispatch(); 
   const likedProducts = useSelector((state: any) => state.like.likedProducts); 
-
   useEffect(() => {
     const loadData = async () => {
       try {
         const response: AxiosResponse = await axios.get("/products");
-        const data: productsType  = response.data.products;
+        const data: productsType[] = response.data.products;
 
         if (Array.isArray(data)) {
           setProducts(data);
@@ -50,14 +51,20 @@ const Products = () => {
     setSelectedImage(null); 
   };
 
+  const handleAddToCart = (product: productsType) => {
+    dispatch(addToCart(product));
+
+
+  };
+
   return (
-    <div className="mt-12 p-4 max-w-[1550px] mx-auto mt-[120px]">
+    <div className="mt-12 p-4 max-w-[1550px] mx-auto mt-[160px]">
       <h1 className="text-4xl font-bold mb-6">Recently Added</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.length === 0 ? (
           <p className="text-lg text-center">Mahsulotlar mavjud emas.</p>
         ) : (
-          products.slice(10, 14).map((product: productsType) => (
+          products.slice(10, 14).map(( product) => (
             <div
               key={product.id}
               className="relative product-card border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group"
@@ -73,7 +80,7 @@ const Products = () => {
                 </button>
               </div>
               <div className="absolute bottom-4 right-4">
-                <button className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
+                <button onClick={() => handleAddToCart(product)} className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 ">
                   <FiShoppingCart size={20} />
                 </button>
               </div>

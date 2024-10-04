@@ -5,7 +5,9 @@ interface IInitialState {
 }
 
 const initialState: IInitialState = {
+    
     likedProducts: JSON.parse(localStorage.getItem('likedProducts') || '[]'),
+
 };
 
 const likeSlice = createSlice({
