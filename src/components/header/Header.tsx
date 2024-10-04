@@ -49,8 +49,8 @@ const Header = () => {
 
                 <div className="flex gap-4 items-center">
                     <div className="flex items-center p-2 bg-gray-100 hover:bg-gray-200 transition rounded gap-2 cursor-pointer">
-                        <BsCart3 className="text-xl" />
-                        <p className="font-medium">Cart</p>
+                       <Link className="flex gap-2" to="/cart"> <BsCart3 className="text-xl " />
+                       <p className="font-medium">Cart</p></Link>
                     </div>
 
                     <div className="p-2 bg-gray-100 hover:bg-gray-200 transition rounded cursor-pointer">

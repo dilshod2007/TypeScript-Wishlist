@@ -14,7 +14,7 @@ import moz from "../../assets/moz.png"
 
 const Banner = () => {
     return (
-        <div className=" w-full h-screen bg-gray-100 max-w-[1550px] mx-auto rounded-b-[100px]">
+        <div className=" w-full h-[700px] bg-gray-100 max-w-[1550px] mx-auto rounded-b-[100px]">
             <div className=" top-5 left-10 z-20 text-sm bg-white h-12  w-full flex items-center px-10 py-2 p-4 gap-4 align-center text-gray-600 text-center border-b">
                 <div className="flex  items-center gap-2  text-gray-600 hover:text-teal-500 cursor-pointer hover:underline transition duration-300 font-bold flex gap-2 align-middle mt-2">
                     <GiHamburgerMenu className="text-2xl" />
@@ -80,7 +80,7 @@ const Banner = () => {
   </div>
 </div>
 <div className="h-[110px] flex items-center justify-center  shadow-lg rounded-lg p-4 overflow-hidden gap-[10px] mt-[20px]">
-  <div className="flex space-x-4 animate-marquee gap-[180px]">
+  <div className="flex space-x-4 gap-[180px]">
     <img src={zepir} alt="Zepir" className="" />
     <img src={pipe} alt="Pipe" className="" />
     <img src={bank} alt="Bank" className="" />

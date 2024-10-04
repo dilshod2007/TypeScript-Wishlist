@@ -51,8 +51,8 @@ const Products = () => {
   };
 
   return (
-    <div className="mt-12 p-4 max-w-[1550px] mx-auto mt-[260px]">
-      <h1 className="text-4xl font-bold mb-6">Featured Products</h1>
+    <div className="mt-12 p-4 max-w-[1550px] mx-auto mt-[120px]">
+      <h1 className="text-4xl font-bold mb-6">Recently Added</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.length === 0 ? (
           <p className="text-lg text-center">Mahsulotlar mavjud emas.</p>
