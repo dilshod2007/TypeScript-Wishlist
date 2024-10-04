@@ -2,7 +2,7 @@ import { BsEye } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { addToCart, removeFromCart, clearCartItem } from "../../redux/slices/cartSlices";
-import { IProduct } from "../../redux/types/index";
+import { productsType } from "../../redux/types/index";
 import { FiTrash2 } from "react-icons/fi";
 
 const Cart = () => {
@@ -10,11 +10,11 @@ const Cart = () => {
   const productsCart = useSelector((state: any) => state.cart);
   const [selectedImage, setSelectedImage] = useState<string | null>(null); 
 
-  const handleQuantityIncrease = (product: IProduct) => {
+  const handleQuantityIncrease = (product:productsType) => {
     dispatch(addToCart(product));
   };
 
-  const handleQuantityDecrease = (product: IProduct) => {
+  const handleQuantityDecrease = (product: productsType) => {
     dispatch(removeFromCart(product));
     if (product.quantity === 1) {
       dispatch(clearCartItem(product));
@@ -37,7 +37,7 @@ const Cart = () => {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">Sizning Savatchangiz</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {productsCart.products.map((product: IProduct) => (
+        {productsCart.products.map((product: productsType) => (
           <div key={product.id} className="flex border rounded-lg shadow-lg p-4 bg-white relative">
             <div className="relative group">
               <img

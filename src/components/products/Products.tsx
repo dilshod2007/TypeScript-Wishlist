@@ -1,26 +1,24 @@
   import { FiShoppingCart, FiHeart, FiEye, FiX } from "react-icons/fi";
   import axios from "../../api/index";
   import { useEffect, useState } from "react";
-  import { IProduct  } from "../../redux/types/index";
+  import { productsType } from "../../redux/types/index";
   import { AxiosResponse } from "axios";
   import { useDispatch, useSelector } from "react-redux"; 
   import { likeProduct, unlikeProduct } from "../../redux/slices/LikeSlices";
   import "../products/products.css";
   import { addToCart } from "../../redux/slices/cartSlices";
-  import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 
   const Products = () => {
-    const [products, setProducts] = useState <IProduct[]>([]);
+    const [products, setProducts] = useState <productsType[]>([]);
     const [selectedImage, setSelectedImage] = useState<string | null>(null); 
     const dispatch = useDispatch(); 
     const likedProducts = useSelector((state: any) => state.like.likedProducts); 
-    const notify = () => toast("Wow so easy!");
     useEffect(() => {
       const loadData = async () => {
         try {
           const response: AxiosResponse = await axios.get("/products");
-          const data: IProduct[] = response.data.products;
+          const data: productsType[] = response.data.products;
 
           if (Array.isArray(data)) {
             setProducts(data);
@@ -53,11 +51,10 @@
       setSelectedImage(null); 
     };
 
-    const handleAddToCart = (product: IProduct) => {
+    const handleAddToCart = (product: productsType) => {
       dispatch(addToCart(product));
 
-      notify();
-      
+
     };
 
     return (

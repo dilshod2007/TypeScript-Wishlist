@@ -1,7 +1,8 @@
-export interface IProduct {
+export type productsType = {
     id: number;
+    thumbnail: string;
     title: string;
     price: number;
-    thumbnail: string;
-    quantity: number; 
-}
+    slice: number;
+    quantity: number;
+};
