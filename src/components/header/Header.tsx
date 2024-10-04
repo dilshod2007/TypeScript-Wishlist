@@ -18,7 +18,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="bg-gray-800 text-white text-sm px-4 py-1">
+            <div className="bg-gray-800 text-white text-sm px-4 py-1 z-50">
                 <div className="max-w-[1550px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <GrCheckboxSelected className="text-green-500" />
@@ -39,7 +39,7 @@ const Header = () => {
                 </div>
             </div>
 
-            <div className="sticky top-0 w-full shadow-md nav">
+            <div className="sticky top-0 w-full shadow-md nav z-50">
                 <div className="max-w-[1550px] mx-auto flex justify-between items-center p-4">
                     <div>
                        <Link to={"/"}> 
