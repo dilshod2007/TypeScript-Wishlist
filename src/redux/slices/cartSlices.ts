@@ -1,58 +1,63 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface IProduct {
+export interface IProduct {
     id: number;
-    quantity: number;
+    title: string;
     price: number;
-    title: string; // Add title here for easier access
+    thumbnail: string;
+    quantity: number;
 }
 
-interface IInitialState {
-    cart: IProduct[];
-}
+const initialState = {
+    products: [] as IProduct[],
+}; 
 
-const initialState: IInitialState = {
-    cart: JSON.parse(localStorage.getItem('cart') || '[]'), 
-};
+if (localStorage.getItem('cart')) {
+  initialState.products = JSON.parse(localStorage.getItem('cart') || '[]');
+} else {
+  localStorage.setItem('cart', JSON.stringify(initialState.products));
+  initialState.products = JSON.parse(localStorage.getItem('cart') || '[]');
+
+  
+
+}
+  
+  
 
 const cartSlice = createSlice({
-    name: "cart",
-    initialState,
-    reducers: {
-        addToCart: (state, action: PayloadAction<{ id: number; price: number; title: string }>) => {
-            const { id, price, title } = action.payload;
-            const existingProduct = state.cart.find(product => product.id === id);
-
-            if (existingProduct) {
-                existingProduct.quantity += 1; 
-            } else {
-                state.cart.push({ id, quantity: 1, price, title });
-            }
-
-            localStorage.setItem('cart', JSON.stringify(state.cart)); 
-        },
-        removeFromCart: (state, action: PayloadAction<number>) => {
-            const existingProduct = state.cart.find(product => product.id === action.payload);
-            
-            if (existingProduct) {
-                if (existingProduct.quantity === 1) {
-                    state.cart = state.cart.filter(product => product.id !== action.payload); // Remove product if quantity is 1
-                } else {
-                    existingProduct.quantity -= 1; // Decrement quantity if greater than 1
-                }
-            }
-
-            localStorage.setItem('cart', JSON.stringify(state.cart)); // Update local storage
-        },
-        clearCart: (state) => {
-            state.cart = [];
-            localStorage.removeItem('cart'); // Clear local storage
-        },
+  name: "cart",
+  initialState,
+  reducers: {
+    addToCart: (state, action) => {
+      const index = state.products.findIndex(product => product.id === action.payload.id);
+      
+      if (index === -1) {
+        state.products.push({ ...action.payload, quantity: 1 });
+        localStorage.setItem('cart', JSON.stringify(state.products));
+      } else {
+        state.products[index].quantity += 1;
+        localStorage.setItem('cart', JSON.stringify(state.products));
+      }
     },
+    removeFromCart: (state, action) => {
+      const index = state.products.findIndex(product => product.id === action.payload.id);
+       
+      if (index !== -1) {
+        if (state.products[index].quantity > 1) {
+          state.products[index].quantity -= 1;
+          localStorage.setItem('cart', JSON.stringify(state.products));
+        } else {
+          state.products = state.products.filter(product => product.id !== action.payload.id);
+          localStorage.setItem('cart', JSON.stringify(state.products));
+        }
+      }
+    },
+    clearCartItem: (state, action) => {
+      state.products = state.products.filter(product => product.id !== action.payload.id);
+      localStorage.setItem('cart', JSON.stringify(state.products));
+    }
+  }
 });
 
-// Export actions to be used in components
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
-
-// Export the reducer to be used in the store
+export const { addToCart, removeFromCart, clearCartItem } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -1,6 +1,7 @@
-export type productsType = {
+export interface IProduct {
     id: number;
-    thumbnail: string;
     title: string;
-    price: number;  
-}[];
+    price: number;
+    thumbnail: string;
+    quantity: number; 
+}
