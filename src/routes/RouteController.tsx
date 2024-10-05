@@ -5,6 +5,8 @@ import { Spin } from 'antd';
 const ProductLikes = lazy(() => import('../routes/like/ProductLikes'));
 const Home = lazy(() => import('../routes/home/Home'));
 import Cart from '../routes/cart/Cart';
+import Login from '../routes/login/Login';
+import Register from './register/Register';
 
 const RouteController = () => {
   const [loading, setLoading] = useState(true); 
@@ -27,6 +29,8 @@ const RouteController = () => {
         <Route path="/" element={<Home />} />
         <Route path="/productLikes" element={<ProductLikes />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Suspense>
   );

@@ -8,13 +8,17 @@ import { Input } from "antd";
 import "../header/header.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
     const { Search } = Input;
     const onSearch = (value: string) => console.log(value);
     const cart = useSelector((state: any) => state.cart.products.length);
     const like = useSelector((state: any) => state.like.likedProducts.length);
-   
+    const {pathname} = useLocation();
+    if (pathname.includes("/login")) return null;
+    if (pathname.includes("/register")) return null;
+
 
     return (
         <>
@@ -34,6 +38,11 @@ const Header = () => {
                         <div className="flex items-center gap-1">
                             <IoIosHelpCircle className="text-xl" />
                             <p>Need Help</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                           <Link to="/login"> <p className="hover:underline cursor-pointer text-teal-500 font-bold flex gap-2">Login</p></Link>
+                            <span className="text-gray-500 font-bold flex gap-2 items-center">or</span>
+                           <Link to='/register'> <p className="hover:underline cursor-pointer text-teal-500 font-bold flex gap-2">Register</p></Link>
                         </div>
                     </div>
                 </div>
